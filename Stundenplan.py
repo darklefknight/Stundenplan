@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
 
 
-class subject:  # the subjects. Each subject should have at least one event.
+class Subject:  # the subjects. Each subject should have at least one event.
 
     def __init__(self, name: str, color: str = "blue"):
         self.name = name  # name of the subject
@@ -16,8 +16,9 @@ class subject:  # the subjects. Each subject should have at least one event.
         self.subject_events = []
         self.color = color
 
-    def add_event(self, event_type: str, day_name: str, start_time, event_duration, day_count=1):
-        self.subject_events.append(event(event_type=event_type, subject_name=self.name, begin=start_time, day=day_name))
+    def add_event(self, event_type: str, day_name: str, start_time, event_duration):
+        self.subject_events.append(Event(event_type=event_type, subject_name=self.name, begin=start_time, day=day_name,
+                                         duration=event_duration))
 
     def events(self):
         eventlist = []
@@ -29,7 +30,7 @@ class subject:  # the subjects. Each subject should have at least one event.
         return self.color
 
 
-class event():  # event of an subject
+class Event:  # event of an subject
 
     def __init__(self, event_type: str, subject_name: str, begin, day, duration=1.5):
         self.name = subject_name
@@ -60,15 +61,15 @@ class event():  # event of an subject
 if __name__ == "__main__":
 
     # Set up the subjects
-    Strahlung = subject("Strahlung", color="blue")
+    Strahlung = Subject("Strahlung", color="blue")
     Strahlung.add_event("Vorlesung", "Montag", 6.5, 1.5)
     Strahlung.add_event("Übung", "Freitag", 9, 1.5)
 
-    Theorie = subject("Theorie", color="green")
+    Theorie = Subject("Theorie", color="green")
     Theorie.add_event("Vorlesung", "Dienstag", 10, 1.5)
     Theorie.add_event("Übung", "Montag", 9, 1.5)
 
-    MPI = subject("MPI", color="orange")
+    MPI = Subject("MPI", color="orange")
     MPI.add_event("Site Meeting", "Mittwoch", 11, 1)
     MPI.add_event("Scientific Meeting", "Donnerstag", 11, 1)
 
@@ -96,7 +97,7 @@ if __name__ == "__main__":
             ax1.add_patch(
                 patches.Rectangle(
                     xy=(x, y),
-                    width=(1),
+                    width=1,
                     height=(element.get_duration()),
                     facecolor=modul.get_color(),
                     alpha=0.7
