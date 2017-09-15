@@ -61,19 +61,42 @@ class Event:  # event of an subject
 if __name__ == "__main__":
 
     # Set up the subjects
-    Strahlung = Subject("Strahlung", color="blue")
-    Strahlung.add_event("Vorlesung", "Montag", 6.5, 1.5)
-    Strahlung.add_event("Übung", "Freitag", 9, 1.5)
-
-    Theorie = Subject("Theorie", color="green")
-    Theorie.add_event("Vorlesung", "Dienstag", 10, 1.5)
-    Theorie.add_event("Übung", "Montag", 9, 1.5)
+    Frei = Subject(" ",color="grey")
+    Frei.add_event(" ","Samstag",6,12)
+    Frei.add_event(" ", "Sonntag", 6, 12)
 
     MPI = Subject("MPI", color="orange")
     MPI.add_event("Site Meeting", "Mittwoch", 11, 1)
     MPI.add_event("Scientific Meeting", "Donnerstag", 11, 1)
+    MPI.add_event("Arbeiten", "Dienstag", 7, 3)
+    MPI.add_event("Arbeiten", "Dienstag", 13, 1)
+    MPI.add_event("Arbeiten", "Donnerstag", 7, 3)
 
-    Stundenplan = [Strahlung, Theorie, MPI]  # DO NOT FORGET TO ADD THE SUBJECT IN THIS LIST!!!
+
+    Strahlung = Subject("Strahlung", color="blue")
+    Strahlung.add_event("Vorlesung", "Donnerstag", 12.25, 1.5)
+
+    Theorie = Subject("Theorie", color="firebrick")
+    Theorie.add_event("Vorlesung", "Dienstag", 10.25, 1.5)
+    Theorie.add_event("Vorlesung", "Donnerstag", 10.25, 1.5)
+    Theorie.add_event("Übung", "Mittwoch", 9, 2)
+
+    Modellierung = Subject("Modellierung", color="green")
+    Modellierung.add_event("Vorlesung", "Freitag",10.25,1.5)
+    Modellierung.add_event("Übung", "Mittwoch", 13, 2)
+
+    SE1 = Subject("Software Entwicklung", color = "cyan")
+    SE1.add_event("Vorlesung","Mittwoch",14.25,1.5)
+    SE1.add_event("Übung", "Montag", 9, 3)
+
+    HL = Subject("HochleistungsRech.", color="yellow")
+    HL.add_event("Vorlesung","Dienstag",14,2)
+    HL.add_event("Vorlesung", "Donnerstag", 12, 2)
+
+    BigData = Subject("BigData", color ="#798EF6" )
+    BigData.add_event("Project","Montag",16.25,1.5)
+
+    Stundenplan = [Frei,MPI, Strahlung, Theorie, Modellierung, SE1, HL, BigData]  # DO NOT FORGET TO ADD THE SUBJECT IN THIS LIST!!!
 
     # Setting up the Roster
     fig1 = plt.figure(num=1, figsize=(16, 9))
@@ -106,5 +129,7 @@ if __name__ == "__main__":
             ax1.text(x + 0.5, y + (element.get_duration() / 2), element.get_label(),
                      verticalalignment="center",
                      horizontalalignment="center",
-                     fontsize=13
+                     fontsize=10
                      )
+
+    fig1.show()
