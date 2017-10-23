@@ -3,6 +3,7 @@ Program for creating a roster (just for week-usage)
 
 """
 
+import matplotlib.patches as mpatches
 import matplotlib.patches as patches
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
@@ -67,21 +68,21 @@ if __name__ == "__main__":
 
     MPI = Subject("MPI", color="orange")
     MPI.add_event("Site Meeting", "Mittwoch", 11, 1)
-    MPI.add_event("Scientific Meeting", "Donnerstag", 11, 1)
-    MPI.add_event("Arbeiten", "Dienstag", 7, 3)
-    MPI.add_event("Arbeiten", "Dienstag", 13, 1)
-    MPI.add_event("Arbeiten", "Donnerstag", 7, 3)
+    # MPI.add_event("Scientific Meeting", "Donnerstag", 11, 1)
+    MPI.add_event("Arbeiten", "Montag", 7, 7)
+    # MPI.add_event("Arbeiten", "Dienstag", 13, 1)
+    # MPI.add_event("Arbeiten", "Donnerstag", 7, 3)
 
 
-    Strahlung = Subject("Strahlung", color="blue")
+    Strahlung = Subject("Strahlung - A", color="cyan")
     Strahlung.add_event("Vorlesung", "Donnerstag", 12.25, 1.5)
 
-    Theorie = Subject("Theorie", color="firebrick")
+    Theorie = Subject("Theorie - A", color="red")
     Theorie.add_event("Vorlesung", "Dienstag", 10.25, 1.5)
     Theorie.add_event("Vorlesung", "Donnerstag", 10.25, 1.5)
     Theorie.add_event("Übung", "Mittwoch", 9, 2)
 
-    Modellierung = Subject("Modellierung", color="green")
+    Modellierung = Subject("Modellierung - A", color="red")
     Modellierung.add_event("Vorlesung", "Freitag",10.25,1.5)
     Modellierung.add_event("Übung", "Mittwoch", 13, 2)
 
@@ -96,7 +97,27 @@ if __name__ == "__main__":
     BigData = Subject("BigData", color ="#798EF6" )
     BigData.add_event("Project","Montag",16.25,1.5)
 
-    Stundenplan = [Frei,MPI, Strahlung, Theorie, Modellierung, SE1, HL, BigData]  # DO NOT FORGET TO ADD THE SUBJECT IN THIS LIST!!!
+    RemoteSensing = Subject("Remote Sensing - A", color="yellow")
+    RemoteSensing.add_event("Vorlesung", "Dienstag", 12.5, 1.5)
+
+    DataAssimilation = Subject("Data Assimilation", color="cyan")
+    DataAssimilation.add_event("Vorlesung", "Freitag", 12.25, 1.5)
+
+    METRAS = Subject("METRAS - A", color="yellow")
+    METRAS.add_event("Vorlesung", "Freitag", 8.25, 1.5)
+
+    BDA = Subject("Big Data Analytics", color="lime")
+    BDA.add_event("Vorlesung +\n Übung", "Freitag", 12.25, 3.25)
+
+    ModellEval = Subject("Modell Evaluation", color="cyan")
+    ModellEval.add_event("Vorlesung", "Montag", 12.5, 1.5)
+
+    Chemie = Subject("Chemie", color="cyan")
+    Chemie.add_event("Vorlesung", "Dienstag", 8.5, 1.5)
+
+    Stundenplan = [Frei, MPI, Strahlung, Theorie, Modellierung, RemoteSensing, METRAS, BDA, ModellEval,
+                   Chemie]  # DO NOT FORGET TO ADD THE SUBJECT IN THIS LIST!!!
+
 
     # Setting up the Roster
     fig1 = plt.figure(num=1, figsize=(16, 9))
@@ -131,5 +152,15 @@ if __name__ == "__main__":
                      horizontalalignment="center",
                      fontsize=10
                      )
+            red_patch = mpatches.Patch(color='red', label='Pflicht')
+            cyan_patch = mpatches.Patch(color='cyan', label="Vertiefung")
+            lime_patch = mpatches.Patch(color='lime', label="Ergänzung")
+            yellow_patch = mpatches.Patch(color='yellow', label="Wahlfach")
+            orange_patch = mpatches.Patch(color='orange', label="MPI")
 
+            plt.legend(handles=[red_patch, cyan_patch, lime_patch, yellow_patch, orange_patch], loc="upper right",
+                       fontsize=12)
+
+    plt.gca().invert_yaxis()
     fig1.show()
+    plt.savefig("C:/Users/darkl/Desktop/Stundeplan.png", dpi=400)
